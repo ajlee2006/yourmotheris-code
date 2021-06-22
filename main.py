@@ -60,7 +60,7 @@ def cronjob():
 				randomFact = "Deriviation: " + result['deriviation'][0]
 			except:
 				pass
-
+	randomFact = randomFact.replace("'","’").replace("`","‘")
 	if 'synonyms' in result:
 		synonym = "Synonyms: " + ", ".join(result['synonyms'])
 	else:
