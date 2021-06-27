@@ -1,4 +1,3 @@
 requests
-APScheduler
 PyGithub
 twython
