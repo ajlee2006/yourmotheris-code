@@ -90,4 +90,7 @@ def cronjob():
 	twitter.update_status(status=formattedmessage)
 
 if __name__ == "__main__":
-	cronjob()
+	while True:
+		time.sleep(60)
+		if (datetime.datetime.now().minute == 0):
+			cronjob()
