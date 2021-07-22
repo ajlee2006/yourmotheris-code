@@ -131,11 +131,7 @@ def cronjob():
 	else:
 		synonym = ""
 
-	asdfas = 'haha jonathan you are banging (a'
-
-	if data['word'][0] in "aeiou":
-		asdfas += 'n'
-	asdfas += ')'
+	asdfas = 'Haha Jonathan, you are banging (my)'
 
 
 	thedata = [time, asdfas, data['word'], randomFact, "Definition: " + result['definition'], synonym]
