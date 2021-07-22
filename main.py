@@ -88,6 +88,65 @@ def cronjob():
 	twitter = Twython(os.environ.get('TWYTHON_A'),os.environ.get('TWYTHON_B'),os.environ.get('TWYTHON_C'),os.environ.get('TWYTHON_D'))
 	formattedmessage = '#{}\n{}\n{}\n{}\n{}\n{}'.format(thedata[1], thedata[2], bold(thedata[3]), thedata[4], thedata[5], thedata[6])
 	twitter.update_status(status=formattedmessage)
+	
+	#
+	#
+	#
+	#
+	#
+	# jonathan
+	#
+	#
+	data = requests.get("https://wordsapiv1.p.rapidapi.com/words/?partOfSpeech=noun&random=true",
+			headers = {
+			'x-rapidapi-key': os.environ.get('API_KEY'),
+			'x-rapidapi-host': "wordsapiv1.p.rapidapi.com"
+			}).json()
+
+	for i in data['results']:
+		if i['partOfSpeech'] == "noun":
+			result = i
+			break
+
+	randomFact = ""
+	if 'pronunciation' in data:
+		if 'noun' in data['pronunciation']:
+			randomFact = "Pronunciation: /" + data['pronunciation']['noun'] + "/"
+		elif 'all' in data['pronunciation']:
+			randomFact = "Pronunciation: /" + data['pronunciation']['all'] + "/"
+		else:
+			randomFact = "Pronunciation: /" + data['pronunciation'] + "/"
+		randomFact = randomFact.replace("_","-").replace(",","ˌ").replace("'","ˈ")
+	else:
+		try:
+			randomFact = "Similar to: " + result['similarTo'][0]
+		except:
+			try:
+				randomFact = "Deriviation: " + result['deriviation'][0]
+			except:
+				pass
+	randomFact = randomFact.replace("'","’").replace("`","‘")
+	if 'synonyms' in result:
+		synonym = "Synonyms: " + ", ".join(result['synonyms'])
+	else:
+		synonym = ""
+
+	asdfas = 'haha jonathan you are banging (a'
+
+	if data['word'][0] in "aeiou":
+		asdfas += 'n'
+	asdfas += ')'
+
+
+	thedata = [time, asdfas, data['word'], randomFact, "Definition: " + result['definition'], synonym]
+
+	for i in thedata:
+		print(i)
+		
+	msg = '\n'.join(thedata[1:])
+		
+	requests.post(os.environ.get('WEBHOOK_JONATHAN'), data={"content":msg})
+	
 
 if __name__ == "__main__":
 	cronjob()
