@@ -89,6 +89,8 @@ def cronjob():
 	formattedmessage = '#{}\n{}\n{}\n{}\n{}\n{}'.format(thedata[1], thedata[2], bold(thedata[3]), thedata[4], thedata[5], thedata[6])
 	twitter.update_status(status=formattedmessage)
 	
+	asdufhoaisudhfnoun = thedata[3]
+	
 	#
 	#
 	#
@@ -142,6 +144,8 @@ def cronjob():
 	msg = '\n'.join(thedata[1:])
 		
 	requests.post(os.environ.get('WEBHOOK_JONATHAN'), data={"content":msg})
+	
+	requests.post(os.environ.get('WEBHOOK_COMBINED'), data={"content":thedata[2] + " " + asdufhoaisudhfnoun})
 	
 
 if __name__ == "__main__":
