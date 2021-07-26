@@ -145,7 +145,7 @@ def cronjob():
 		
 	requests.post(os.environ.get('WEBHOOK_JONATHAN'), data={"content":msg})
 	
-	requests.post(os.environ.get('WEBHOOK_COMBINED'), data={"content":thedata[2] + " " + asdufhoaisudhfnoun})
+	requests.post(os.environ.get('WEBHOOK_COMBINED'), data={"content": asdufhoaisudhfnoun + " " + thedata[2]})
 	
 
 if __name__ == "__main__":
