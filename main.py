@@ -136,7 +136,7 @@ def cronjob():
 	asdfas = 'Haha Jonathan, you are banging (my)'
 
 
-	thedata = [time, asdfas, data['word'], randomFact, "Definition: " + result['definition'], synonym]
+	thedata = [time, asdfas, '**'+data['word']+'**', randomFact, "Definition: " + result['definition'], synonym]
 
 	for i in thedata:
 		print(i)
@@ -145,7 +145,7 @@ def cronjob():
 		
 	requests.post(os.environ.get('WEBHOOK_JONATHAN'), data={"content":msg})
 	
-	requests.post(os.environ.get('WEBHOOK_COMBINED'), data={"content": asdufhoaisudhfnoun + " " + thedata[2]})
+	requests.post(os.environ.get('WEBHOOK_COMBINED'), data={"content": asdufhoaisudhfnoun + " " + data['word']})
 	
 
 if __name__ == "__main__":
